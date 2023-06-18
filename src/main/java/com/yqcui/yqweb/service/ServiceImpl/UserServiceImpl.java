@@ -1,7 +1,8 @@
-package com.yqcui.yqweb.service;
+package com.yqcui.yqweb.service.ServiceImpl;
 
 import com.yqcui.yqweb.entity.User;
 import com.yqcui.yqweb.mapper.UserMapper;
+import com.yqcui.yqweb.service.UserServiceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
