@@ -80,14 +80,14 @@
 
     <build>
         <finalName>yqWeb</finalName>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--&lt;!&ndash;                <version>${project.parent.version}</version>&ndash;&gt;-->
-<!--&lt;!&ndash;                <version>3.0.5</version>&ndash;&gt;-->
-<!--            </plugin>-->
-<!--        </plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                <version>${project.parent.version}</version>-->
+<!--                <version>3.0.5</version>-->
+            </plugin>
+        </plugins>
     </build>
 
 </project>
