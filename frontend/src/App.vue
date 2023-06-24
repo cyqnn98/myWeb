@@ -1,16 +1,13 @@
 <template>
-  <HomePage></HomePage>
+  <page-header></page-header>
+  <router-view/>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import HomePage from './components/HomePage.vue'
-
-export default {
-  name: 'App',
-  components: {
-    // HelloWorld,
-    HomePage
+import PageHeader from '@/components/Header.vue'
+export default{
+  components:{
+    PageHeader
   }
 }
 </script>
@@ -22,6 +19,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
 </style>
