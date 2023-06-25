@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController //combines @Controller and @ResponseBody
 @RequestMapping("/api/products")
+//@CrossOrigin
 public class ProductController {
     private ProductService productService;
 
