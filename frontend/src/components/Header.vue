@@ -10,7 +10,7 @@
     </el-menu-item>
     <el-menu-item index="3">GIFTS</el-menu-item>
     <el-menu-item index="4">
-        <router-link class='no-underline' to="/products">PRODUCTS</router-link>
+        <router-link class='no-underline' to="/products">BOOKS</router-link>
     </el-menu-item>
   </el-menu>
 </template>
