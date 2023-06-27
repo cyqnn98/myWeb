@@ -1,5 +1,5 @@
 <template>
-  <page-header></page-header>
+  <page-header class="headerBottom"></page-header>
   <router-view/>
 </template>
 
@@ -19,6 +19,10 @@ export default{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.headerBottom{
+  margin-bottom: 40px;
 }
 
 </style>

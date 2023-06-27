@@ -1,27 +1,30 @@
 package com.yqcui.yqweb.service.ServiceImpl;
 
 import com.yqcui.yqweb.entity.User;
-import com.yqcui.yqweb.mapper.UserMapper;
-import com.yqcui.yqweb.service.UserServiceDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.yqcui.yqweb.repository.UserRepository;
+import com.yqcui.yqweb.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserServiceDAO {
-    @Autowired
-    private UserMapper userMapper;
+public class UserServiceImpl implements UserService{
+    private UserRepository userRepository;
 
+    public UserServiceImpl(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
     @Override
-    public User selectById(int id) {
-        return userMapper.selectById(id);
+    public User saveUser(User user) {
+        if(userRepository.existsByEmail(user.getEmail())
+                || userRepository.existsByPhoneNum(user.getPhoneNum())){
+            return null;
+        }
+        return userRepository.save(user);
     }
 
     @Override
-    public List<User> selectAllUserAndOrders() {
-        return userMapper.selectAllUserAndOrders();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
-
 }
-

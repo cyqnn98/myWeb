@@ -12,6 +12,9 @@
     <el-menu-item index="4">
         <router-link class='no-underline' to="/products">BOOKS</router-link>
     </el-menu-item>
+    <el-menu-item index="5">
+        <router-link class='no-underline' to="/login">LOGIN/REGISTER</router-link>
+    </el-menu-item>
   </el-menu>
 </template>
 

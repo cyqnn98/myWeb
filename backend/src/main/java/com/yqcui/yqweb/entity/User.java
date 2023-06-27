@@ -1,17 +1,30 @@
 package com.yqcui.yqweb.entity;
 
-public class User {
-    private String name;
-    private String password;
-    private String dob;
-    private int id;
+import jakarta.persistence.*;
 
-    public int getId() {
-        return id;
+@Entity
+@Table(name = "`Users`")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+    @Column(name = "userName", nullable = false)
+    private String name;
+    @Column(name = "`phoneNumber`", nullable = false, unique = true)
+    private long phoneNum;
+    @Column(name = "`email`", nullable = false, unique = true)
+    private String email;
+    @Column(name = "`password`", nullable = false)
+    private String password;
+    @Column(name = "`dateOfBirth`", nullable = false)
+    private String dateOfBirth;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -22,12 +35,20 @@ public class User {
         this.name = name;
     }
 
-    public String getDob() {
-        return dob;
+    public long getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setPhoneNum(long phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -38,13 +59,11 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", dob='" + dob + '\'' +
-                ", id=" + id +
-                '}';
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
