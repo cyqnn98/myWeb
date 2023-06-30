@@ -27,4 +27,16 @@ public class UserServiceImpl implements UserService{
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+
+    @Override
+    public boolean existsUser(User user) {
+        return userRepository.existsByEmail(user.getEmail()) || userRepository.existsByPhoneNum(user.getPhoneNum());
+    }
+
+    @Override
+    public boolean passwordMatched(User user) {
+        User userInDatabase = userRepository.getUserByEmail(user.getEmail());
+        return userInDatabase.getPassword().equals(user.getPassword());
+    }
 }
