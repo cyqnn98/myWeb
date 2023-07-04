@@ -31,6 +31,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean existsUser(User user) {
+        System.out.println(user.getEmail());
+        System.out.println(user.getPhoneNum());
         return userRepository.existsByEmail(user.getEmail()) || userRepository.existsByPhoneNum(user.getPhoneNum());
     }
 
