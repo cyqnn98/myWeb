@@ -37,6 +37,15 @@
                     <el-form-item>
                         <el-button type="primary" @click="submitForm">Submit</el-button>
                         <el-button>Cancel</el-button>
+                        <div>
+                        <div class="registerText">
+                            Already have an account? Click
+                            <RouterLink to="/login">
+                                <el-link type="primary">here</el-link>
+                            </RouterLink>
+                            to login.
+                        </div>
+                    </div>
                     </el-form-item>
                 </el-form>
             </el-card>
@@ -56,7 +65,6 @@
                     email:"",
                     password:"",
                 }
-    
             }
         },
         methods: {

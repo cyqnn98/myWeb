@@ -43,19 +43,20 @@ public class UserController{
         return Result.ok().data("token", token);
     }
 
-    @GetMapping("/info")
+    @PostMapping("/info")
     public Result getInfo(@RequestBody String token){
         System.out.println("here");
         System.out.println(token);
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            JsonNode jsonNode = objectMapper.readTree(token);
-            token = jsonNode.get("token").asText();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            JsonNode jsonNode = objectMapper.readTree(token);
+//            token = jsonNode.get("token").asText();
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
         Claims email = TokenProcessor.verify(token);
-        return Result.ok().data("email", email);
+        System.out.println("Email decrypted by token is" + email.getSubject());
+        return Result.ok().data("userInfo", userService.getUserByEmail(email.getSubject()));
     }
 
     @GetMapping

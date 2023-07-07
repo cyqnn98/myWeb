@@ -9,4 +9,5 @@ public interface UserService {
      List<User> getAllUsers();
      boolean existsUser(User user);
      boolean passwordMatched(User user);
+     User getUserByEmail(String email);
 }

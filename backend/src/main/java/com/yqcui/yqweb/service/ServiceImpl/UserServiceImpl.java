@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService{
         User userInDatabase = userRepository.getUserByEmail(user.getEmail());
         return userInDatabase.getPassword().equals(user.getPassword());
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
 }

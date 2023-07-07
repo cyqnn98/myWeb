@@ -47,17 +47,32 @@ export default {
             userForm: {
                 email: "",
                 password: "",
-            }
-
+            },
+            jwtToken: ""
         }
     },
     methods: {
         confirm() {
             UserService.login(this.userForm)
+                .then((response) => {
+                    console.log("in login response");
+                    console.log(response.data.data.token);
+                    this.jwtToken = response.data.data.token;
+                    // console.log(this.jwtToken);
+                    if (response.data.code === 20000) {
+                        console.log('in response data')
+                        localStorage.setExpire("token", this.jwtToken, 1000 * 60 * 60 * 24 * 7);
+                        alert("login success")
+                        this.$router.push("/userInfo")
+                    }
+                })
+                .catch((error) => {
+                    throw error;
+                });
+        },
+        mounted() {
+            // this.getProducts();
         }
-    },
-    mounted() {
-        // this.getProducts();
     }
 }
 </script>
@@ -66,7 +81,8 @@ export default {
 .formPosition {
     margin-top: 100px;
 }
-.registerText{
+
+.registerText {
     margin-left: 30px;
 }
 </style>

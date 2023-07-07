@@ -3,26 +3,33 @@ import axios from 'axios';
 const USER_API_BASE_URL = 'http://localhost:8080/api/users';
 
 class UserService{
-    login(userForm){
-        // axios.post(USER_API_BASE_URL+'/login', {
-        //     userForm: userForm
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
-        
-        axios({
-            method: 'post',
-            url: USER_API_BASE_URL+'/login',
-            data: userForm
-        }).then(function (response){
+    async login(userForm){
+        try {
+            const response = await axios({
+                method: 'post',
+                url: USER_API_BASE_URL + '/login',
+                data: userForm
+            });
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    async getUserInfo(token){
+        try{
+            const response = await axios({
+                method: 'post',
+                url: USER_API_BASE_URL + '/info',
+                data: token
+            });
             console.log(response)
-        }).catch(function (error){
+            return response
+        }catch(error){
             console.log(error)
-        });
+            throw error
+        }
     }
 }
 
