@@ -1,4 +1,5 @@
 <template>
+     <page-header class="headerBottom"></page-header>
 <div>
     <el-space wrap>
         <el-card class="box-card" style="width: 800px">
@@ -29,6 +30,9 @@
                             </RouterLink>
                             to register.
                         </div>
+                        <!-- <div>
+                            {{ getToken }}
+                        </div> -->
                     </div>
                 </el-form-item>
             </el-form>
@@ -39,9 +43,13 @@
 </template>
 
 <script>
+import PageHeader from '@/components/Header.vue'
 import UserService from '@/services/UserService'
 
 export default {
+    components:{
+        PageHeader
+    },
     data() {
         return {
             userForm: {
@@ -61,8 +69,11 @@ export default {
                     // console.log(this.jwtToken);
                     if (response.data.code === 20000) {
                         console.log('in response data')
-                        localStorage.setExpire("token", this.jwtToken, 1000 * 60 * 60 * 24 * 7);
+                        localStorage.setExpire("token", this.jwtToken, 1000 * 60 * 3); //3 min
                         alert("login success")
+                        this.$store.commit('setToken', this.jwtToken)
+                        console.log("after commit")
+                        console.log(this.$store.state.token)
                         this.$router.push("/userInfo")
                     }
                 })
@@ -72,6 +83,13 @@ export default {
         },
         mounted() {
             // this.getProducts();
+            console.log("in login view mounted")
+            console.log()
+        }
+    },
+    computed: {
+        getToken() {
+            return this.$store.state.token
         }
     }
 }

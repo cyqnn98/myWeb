@@ -1,4 +1,5 @@
 <template>
+    <page-header class="headerBottom"></page-header>
 <el-descriptions title="User Info">
     <el-descriptions-item label="Username">{{userInfo.userName}}</el-descriptions-item>
     <el-descriptions-item label="Telephone">{{userInfo.phoneNumber}}</el-descriptions-item>
@@ -13,31 +14,41 @@
 
 <script>
 import UserService from '@/services/UserService'
+import PageHeader from '@/components/Header.vue'
 
-export default{
-    data(){
-        return{
+export default {
+    components: {
+        PageHeader
+    },
+    data() {
+        return {
             userInfo: {
-                userName:"",
+                userName: "",
                 phoneNumber: "",
-                email:"",
-                dateOfBirth:""
+                email: "",
+                dateOfBirth: ""
             }
         }
     },
-    mounted(){
-        let tokenStored = localStorage.getExpire("token")
-        if(tokenStored === null){
-            console.log("tokenStored is null")
-        }else{
-            this.getUserInfo(tokenStored)
-        }
+    mounted() {
+        // let tokenStored = localStorage.getExpire("token")
+        // if (tokenStored === null) {
+        //     console.log("tokenStored is null")
+        // } else {
+        //     this.getUserInfo(tokenStored)
+        // }
+        this.getUserInfo(this.getToken)
     },
     methods: {
-        getUserInfo(token){
+        getUserInfo(token) {
+            if(token === null || token === ""){
+                alert("Please login!")
+                this.$router.push("/login")
+                return
+            }
             UserService.getUserInfo(token)
-            .then((response) => {
-                if (response.data.code === 20000) {
+                .then((response) => {
+                    if (response.data.code === 20000) {
                         console.log('in getUserInfo response data')
                         let curUserInfo = response.data.data.userInfo
                         this.userInfo.userName = curUserInfo.name
@@ -45,10 +56,15 @@ export default{
                         this.userInfo.email = curUserInfo.email
                         this.userInfo.dateOfBirth = curUserInfo.dateOfBirth
                     }
-            })
-            .catch((error) => {
-                throw error
-            })
+                })
+                .catch((error) => {
+                    throw error
+                })
+        }
+    },
+    computed: {
+        getToken() {
+            return this.$store.state.token
         }
     }
 }

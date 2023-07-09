@@ -1,13 +1,13 @@
 <template>
-  <page-header class="headerBottom"></page-header>
+  <!-- <page-header class="headerBottom"></page-header> -->
   <router-view/>
 </template>
 
 <script>
-import PageHeader from '@/components/Header.vue'
+// import PageHeader from '@/components/Header.vue'
 export default{
   components:{
-    PageHeader
+    // PageHeader
   }
 }
 </script>
