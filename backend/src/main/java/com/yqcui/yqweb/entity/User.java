@@ -7,23 +7,26 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
-    @Column(name = "userName", nullable = false)
+    private Long userId;
+    @Column(name = "user_name", nullable = false)
     private String name;
-    @Column(name = "`phoneNumber`", nullable = false, unique = true)
+    @Column(name = "`phone_number`", nullable = false, unique = true)
     private long phoneNum;
     @Column(name = "`email`", nullable = false, unique = true)
     private String email;
     @Column(name = "`password`", nullable = false)
     private String password;
-    @Column(name = "`dateOfBirth`", nullable = false)
+    @Column(name = "`date_of_birth`", nullable = false)
     private String dateOfBirth;
 
-    public int getUserId() {
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -65,5 +68,13 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
