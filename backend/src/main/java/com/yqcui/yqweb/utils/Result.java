@@ -1,9 +1,10 @@
 package com.yqcui.yqweb.utils;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Result {
+public class Result{
     private boolean success;
     private Integer code;
     private String message;

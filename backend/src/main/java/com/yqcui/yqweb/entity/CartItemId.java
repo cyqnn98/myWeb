@@ -14,6 +14,21 @@ public class CartItemId implements Serializable {
     @Column(name = "product_id")
     private Long productId; // matches the type of the Product entity's primary key
 
+    public Long getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 }
 
 
