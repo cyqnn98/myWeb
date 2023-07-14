@@ -1,6 +1,5 @@
 package com.yqcui.yqweb.utils;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 

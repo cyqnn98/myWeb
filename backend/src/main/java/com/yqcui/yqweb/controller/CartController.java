@@ -1,31 +1,35 @@
 package com.yqcui.yqweb.controller;
 
-import com.yqcui.yqweb.entity.CartItem;
-import com.yqcui.yqweb.service.CartItemService;
+import com.yqcui.yqweb.entity.Cart;
 import com.yqcui.yqweb.service.CartService;
 import com.yqcui.yqweb.utils.Result;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/carts")
 public class CartController {
     private CartService cartService;
-    private CartItemService cartItemService;
 
-    public CartController(CartService cartService, CartItemService cartItemService){
+    public CartController(CartService cartService){
         this.cartService = cartService;
-        this.cartItemService = cartItemService;
     }
 
     @PostMapping("/addToCart")
     public Result addToCart(@RequestParam(name = "productId") Long productId,
                             @RequestParam(name = "userId") Long userId){
         Long cartId = cartService.getCartIdByUserId(userId);
-        CartItem cartItem = cartItemService.getCartItem(productId, cartId);
-        if(cartItem == null){
-            cartItemService.addItem(cartId, productId, 1);
+        if(cartId == null){
+            cartService.addItem(cartId, userId, productId, 1);
         }else{
-            cartItemService.increaseItemNum(productId, cartId);
+            Cart cartItem = cartService.getCartItem(productId, cartId);
+            if(cartItem == null){
+                cartService.addItem(cartId, userId, productId, 1);
+            }else{
+                cartService.increaseItemNum(productId, cartId);
+            }
         }
         return Result.ok();
     }

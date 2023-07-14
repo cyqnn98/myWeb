@@ -16,12 +16,24 @@ public class Cart {
     @Column(name = "cart_id")
     private Long cartId;
 
+//    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<CartItem> cartItems = new HashSet<>();
+
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CartItem> cartItems = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
+
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    @Column(name = "product_num", nullable = false)
+    private int productNum;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     public Long getCartId() {
         return cartId;
@@ -31,13 +43,13 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public Set<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(Set<CartItem> cartItems) {
-        this.cartItems = cartItems;
-    }
+//    public Set<CartItem> getCartItems() {
+//        return cartItems;
+//    }
+//
+//    public void setCartItems(Set<CartItem> cartItems) {
+//        this.cartItems = cartItems;
+//    }
 
     public User getUser() {
         return user;
