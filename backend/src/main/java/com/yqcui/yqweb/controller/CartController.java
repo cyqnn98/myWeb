@@ -29,4 +29,17 @@ public class CartController {
         }
         return Result.ok();
     }
+
+    @PostMapping("/deleteFromCart")
+    public Result deleteFromCart(@RequestParam(name = "productId") Long productId,
+                                 @RequestParam(name = "userId") Long userId){
+        Long cartId = cartService.getCartIdByUserId(userId);
+        int productNum = cartItemService.getProductNum(cartId, productId);
+        if(productNum == 1){
+            cartItemService.deleteFromCart(productId, userId);
+        }else{
+            cartItemService.decreaseProductNum(cartId, productId);
+        }
+        return Result.ok();
+    }
 }

@@ -27,4 +27,19 @@ public class CartItemServiceImpl implements CartItemService {
     public void increaseItemNum(Long productId, Long userId) {
         cartItemRepository.increaseItemNum(productId, userId);
     }
+
+    @Override
+    public void deleteFromCart(Long productId, Long userId) {
+        cartItemRepository.deleteFromCart(productId, userId);
+    }
+
+    @Override
+    public int getProductNum(Long cartId, Long productId) {
+        return cartItemRepository.getProductNum(cartId, productId);
+    }
+
+    @Override
+    public void decreaseProductNum(Long cartId, Long productId) {
+        cartItemRepository.decreaseProductNum(cartId, productId);
+    }
 }

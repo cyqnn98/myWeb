@@ -8,4 +8,5 @@ public interface CartService {
     void insertCartByUserId(Long userId);
 
     Long getCartIdByUserId(Long userId);
+
 }
