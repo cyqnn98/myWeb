@@ -1,5 +1,6 @@
 package com.yqcui.yqweb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,15 +16,31 @@ public class Cart {
     @Column(name = "cart_id")
     private Long cartId;
 
-//    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<CartItem> cartItems = new HashSet<>();
-
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product> products = new HashSet<>();
+    private Set<CartItem> cartItems = new HashSet<>();
+
+//    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Product> products = new HashSet<>();
 
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
+    public Long getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

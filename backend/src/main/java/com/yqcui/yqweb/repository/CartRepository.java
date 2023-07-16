@@ -1,12 +1,17 @@
 package com.yqcui.yqweb.repository;
 
 import com.yqcui.yqweb.entity.Cart;
-import com.yqcui.yqweb.entity.Product;
+import com.yqcui.yqweb.entity.CartItem;
+import jakarta.persistence.ColumnResult;
+import jakarta.persistence.ConstructorResult;
+import jakarta.persistence.SqlResultSetMapping;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
@@ -18,17 +23,13 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query(value = "SELECT cart_id FROM Cart WHERE user_id = (?1)", nativeQuery = true)
     Long getCartIdByUserId(Long userId);
 
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO Cart (cart_id, user_id, product_id, product_num) VALUES (?1, ?2, ?3, ?4)",
-    nativeQuery = true)
-    void addItem(Long cartId, Long userId, Long productId, int productNum);
 
-    @Query(value = "SELECT * FROM  Cart WHERE product_id = (?1) AND cart_id = (?2)", nativeQuery = true)
-    Cart getCartItem(Long productId, Long cartId);
+    @Query(value = "SELECT * FROM Cart WHERE user_id = (?1)", nativeQuery = true)
+    Cart getCartByUserId(Long userId);
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE Cart SET product_num = product_num+1 WHERE product_id=(?1) AND cart_id=(?2)", nativeQuery = true)
-    void increaseItemNum(Long productId, Long cartId);
+//    @Query(value = "SELECT ci.cart_id, ci.product_id, ci.product_num FROM Cart_Item ci " +
+//            "JOIN Cart c ON c.cart_id = ci.cart_id " +
+//            "WHERE c.user_id = ?1", nativeQuery = true)
+//    List<Object> getCart(Long userId);
+
 }

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 
     @Query(value = "SELECT* FROM Cart_Item WHERE product_id = (?1) AND cart_id = (?2)", nativeQuery = true)
@@ -36,4 +38,9 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     @Modifying
     @Query(value = "UPDATE Cart_Item SET product_num = product_num - 1 WHERE cart_id = (?1) AND product_id = (?2)", nativeQuery = true)
     void decreaseProductNum(Long cartId, Long productId);
+
+    @Query(value = "SELECT * FROM Cart_Item WHERE cart_id=(?1)", nativeQuery = true)
+    List<CartItem> getCartItem(Long cartId);
+
+    List<CartItem> findAllByCart_CartId(Long cartId);
 }

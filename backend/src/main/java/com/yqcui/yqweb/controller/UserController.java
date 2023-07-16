@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqcui.yqweb.entity.User;
+import com.yqcui.yqweb.service.CartService;
 import com.yqcui.yqweb.service.UserService;
 import com.yqcui.yqweb.utils.Result;
 import com.yqcui.yqweb.utils.TokenProcessor;
@@ -18,17 +19,23 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController{
     private UserService userService;
+    private CartService cartService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService, CartService cartService){
         this.userService = userService;
+        this.cartService = cartService;
     }
     @PostMapping("/register")
     public ResponseEntity<User> saveUser(@RequestBody User user){
         User userSaved = userService.saveUser(user);
         if(userSaved == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            Long userId = userSaved.getUserId();
+            System.out.println("here");
+            cartService.insertCartByUserId(userId);
+            return new ResponseEntity<>(userSaved, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(userSaved, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

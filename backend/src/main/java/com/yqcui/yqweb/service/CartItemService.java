@@ -2,6 +2,8 @@ package com.yqcui.yqweb.service;
 
 import com.yqcui.yqweb.entity.CartItem;
 
+import java.util.List;
+
 public interface CartItemService {
 
     CartItem getCartItem(Long productId, Long userId);
@@ -15,4 +17,6 @@ public interface CartItemService {
     int getProductNum(Long cartId, Long productId);
 
     void decreaseProductNum(Long cartId, Long productId);
+
+    List<CartItem> getCartItem(Long cartId);
 }

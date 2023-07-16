@@ -20,9 +20,12 @@ public class Product {
     @Column(name = "`product_price`", nullable = false)
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> cartItems = new HashSet<>();
+
+//    @ManyToOne
+//    @JoinColumn(name = "cart_id")
+//    private Cart cart;
 
 //    @ManyToMany(mappedBy = "products")
 //    private List<Cart> carts;

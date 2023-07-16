@@ -5,6 +5,8 @@ import com.yqcui.yqweb.repository.CartItemRepository;
 import com.yqcui.yqweb.service.CartItemService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository;
@@ -41,5 +43,10 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void decreaseProductNum(Long cartId, Long productId) {
         cartItemRepository.decreaseProductNum(cartId, productId);
+    }
+
+    @Override
+    public List<CartItem> getCartItem(Long cartId) {
+        return cartItemRepository.findAllByCart_CartId(cartId);
     }
 }

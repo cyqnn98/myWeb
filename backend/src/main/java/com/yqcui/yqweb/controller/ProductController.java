@@ -32,7 +32,7 @@ public class ProductController {
 
     //build getProductById REST API
     @GetMapping("{productId}")
-    public Product getProductById(@PathVariable("productId") int productId){
+    public Product getProductById(@PathVariable("productId") Long productId){
         return productService.getProductById(productId);
     }
 
