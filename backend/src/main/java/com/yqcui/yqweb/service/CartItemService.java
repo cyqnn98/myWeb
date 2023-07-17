@@ -19,4 +19,6 @@ public interface CartItemService {
     void decreaseProductNum(Long cartId, Long productId);
 
     List<CartItem> getCartItem(Long cartId);
+
+    void emptyCart(Long cartId);
 }

@@ -39,8 +39,10 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     @Query(value = "UPDATE Cart_Item SET product_num = product_num - 1 WHERE cart_id = (?1) AND product_id = (?2)", nativeQuery = true)
     void decreaseProductNum(Long cartId, Long productId);
 
-    @Query(value = "SELECT * FROM Cart_Item WHERE cart_id=(?1)", nativeQuery = true)
-    List<CartItem> getCartItem(Long cartId);
-
     List<CartItem> findAllByCart_CartId(Long cartId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM Cart_Item WHERE cart_id = (?1)", nativeQuery = true)
+    void emptyCart(Long cartId);
 }

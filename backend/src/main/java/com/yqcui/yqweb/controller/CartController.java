@@ -57,6 +57,8 @@ public class CartController {
         Cart cart = cartService.getCartByUserId(userId);
         Long cartId = cartService.getCartIdByUserId(userId);
         List<CartItem> cartItems = cartItemService.getCartItem(cartId);
+        if(cartItems == null || cartItems.size() == 0)
+            return null;
         for (int i = 0; i <cartItems.size(); i++) {
             CartItem cartItem = cartItems.get(i);
             cartItem.setCart(cart);
@@ -65,5 +67,12 @@ public class CartController {
         System.out.println("in cart controller");
         System.out.println(cartItems.get(0));
         return cartItems;
+    }
+
+    @PostMapping("/emptyCart")
+    public Result emptyCart(@RequestParam(name = "userId") Long userId){
+        Long cartId = cartService.getCartIdByUserId(userId);
+        cartItemService.emptyCart(cartId);
+        return Result.ok();
     }
 }
