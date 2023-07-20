@@ -32,7 +32,8 @@ Storage.prototype.getExpire= key =>{
 const store = createStore({
   state () {
     return {
-      token: localStorage.getExpire("token")
+      token: localStorage.getExpire("token"),
+      userId: localStorage.getExpire("userId")
     }
   },
   mutations: {
@@ -42,6 +43,9 @@ const store = createStore({
       state.token = token
       console.log("in mutations after set state.token, the state.token is")
       console.log(state.token)
+    },
+    setUserId(state, userId){
+      state.userId = userId
     }
   },
 //   plugins:[createPersistedState({

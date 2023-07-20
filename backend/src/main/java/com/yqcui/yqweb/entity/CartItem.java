@@ -23,7 +23,6 @@ public class CartItem {
             @JoinColumn(name="product_id", referencedColumnName="product_id")
     })
     @ManyToOne
-    @JsonIgnore
     private Product product;
 
     @Column(name = "product_num")

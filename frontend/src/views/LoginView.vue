@@ -56,7 +56,8 @@ export default {
                 email: "",
                 password: "",
             },
-            jwtToken: ""
+            jwtToken: "",
+            userId:""
         }
     },
     methods: {
@@ -66,12 +67,15 @@ export default {
                     console.log("in login response");
                     console.log(response.data.data.token);
                     this.jwtToken = response.data.data.token;
+                    this.userId = response.data.data.userId;
                     // console.log(this.jwtToken);
                     if (response.data.code === 20000) {
                         console.log('in response data')
                         localStorage.setExpire("token", this.jwtToken, 1000 * 60 * 3); //3 min
+                        localStorage.setExpire("userId", this.userId, 1000 * 60 * 3)
                         alert("login success")
                         this.$store.commit('setToken', this.jwtToken)
+                        this.$store.commit('setUserId', this.userId);
                         console.log("after commit")
                         console.log(this.$store.state.token)
                         this.$router.push("/userInfo")

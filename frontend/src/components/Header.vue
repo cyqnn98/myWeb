@@ -10,6 +10,10 @@
     <el-menu-item index="5">
         <router-link class='no-underline' :to=this.url>{{ loginHeader }}</router-link>
     </el-menu-item>
+    <el-menu-item v-show="showElement" index="6">
+        <router-link class='no-underline' to="/cart">CART</router-link>
+    </el-menu-item>
+
 </el-menu>
 </template>
 
@@ -20,7 +24,8 @@ export default {
     data() {
         return {
             url: "/login",
-            loginHeader: "MY ACCOUNT"
+            loginHeader: "MY ACCOUNT",
+            showElement: false
         }
     },
     mounted() {
@@ -33,6 +38,7 @@ export default {
             console.log("in mounted not null")
             console.log(this.getToken)
             console.log(this.token)
+            this.showElement = true
             this.url = "/userInfo"
         }
     },

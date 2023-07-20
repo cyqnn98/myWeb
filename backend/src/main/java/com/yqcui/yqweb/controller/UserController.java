@@ -47,7 +47,8 @@ public class UserController{
             return Result.error().setMessage("Wrong password");
         }
         String token = TokenProcessor.createToken(user.getEmail());
-        return Result.ok().data("token", token);
+        Long userId = userService.getUserByEmail(user.getEmail()).getUserId();
+        return Result.ok().data("token", token).data("userId", userId);
     }
 
     @PostMapping("/info")
